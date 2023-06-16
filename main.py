@@ -50,7 +50,7 @@ def login_user():
 
     if not login_via_session:
         try:
-            logger.info("Attempting to login via username and password. username: testaccount7047")
+            logger.info("Attempting to login via username and password. username:")
             if cl.login("USERNAME", "PASSWORD"):
                 login_via_pw = True
         except Exception as e:
