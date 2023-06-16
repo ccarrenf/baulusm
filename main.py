@@ -117,7 +117,7 @@ for ind in df.index:
                 #Obtiene la id de la imagen
                 img_id = s_link[s_link.find("id=") + 3:]
                 #Nombre del objeto
-                obj_name = df['¿Cuál es la cosa perdida?'][ind]
+                obj_name = df['Cuál es la cosa perdida?'][ind]
                 #Lugar donde fue visto por la última vez
                 last_seen = df['Dónde se te perdió?'][ind]
                 #Información de contacto
@@ -138,15 +138,13 @@ for ind in df.index:
                     time.sleep(10)
             else:
                 #obtiene el link de la imagen
-                obj_name = df['¿Cuál es la cosa perdida?'][ind]
+                obj_name = df['Cuál es la cosa perdida?'][ind]
                 last_seen = df['Dónde se te perdió?'][ind]
                 contact_info = df['Información de contacto'][ind]
-                filename = "generic.png"
+                filename = "generic.jpg"
                 p = filename
-                img_desc = "Objeto encontrado: " + obj_name + "\n" + "Lugar donde se perdió: \" " + last_seen + "\" \n" + "Información de contacto: \"" + place_left+ "\" \n"
-                with open(filename, 'wb') as file:
-                    #Sube una publicación con una foto genérica
-                    cl.photo_upload(path=Path(p),caption=img_desc, usertags=[])
+                img_desc = "Objeto encontrado: " + str(obj_name) + "\n" + "Lugar donde se perdió: \" " + str(last_seen) + "\" \n" + "Información de contacto: \"" + str(contact_info) + "\" \n"
+                cl.photo_upload(path=Path(p),caption=img_desc, usertags=[])
                 time.sleep(10)
 
 print("Las nuevas entradas se subieron con éxito.")
