@@ -80,7 +80,7 @@ df.head()
 today = datetime.date.today()
 
 
-#Recorre la tabla a través de los índice
+#Recorre la tabla a través de los índices
 for ind in df.index:
     if ind.day == today.day and ind.month == today.month and ind.year == today.year:
         if str(df['Buscas o encontraste algo?'][ind]) == "Encontré algo perdido":  
@@ -98,7 +98,7 @@ for ind in df.index:
             #Enlace de descarga de la imagen
             link = "https://drive.google.com/uc?id=" + img_id
             img_req = requests.get(link)
-            img_desc = "Objeto encontrado: " + obj_name + "\n" + "Lugar donde se encontró: " + place_found + "\n" + "Puede ir a buscarlo en " + place_left
+            img_desc = "Objeto encontrado: " + str(obj_name) + "\n" + "Lugar donde se encontró: " + str(place_found) + "\n" + "Puede ir a buscarlo en " + str(place_left)
             if img_req.status_code == 200:
                 filename = "uploadImg.png"
                 p = filename
@@ -108,6 +108,7 @@ for ind in df.index:
                     print("Imagen descargada")
                     #Sube una publicación con la foto
                     cl.photo_upload(path=Path(p),caption=img_desc, usertags=[])
+                print("Se subió la publicación")
                 time.sleep(10)
         else:
             if str(df['Imagen del objeto perdido'][ind]) != "nan":
@@ -116,6 +117,7 @@ for ind in df.index:
                 s_link = str(link)
                 #Obtiene la id de la imagen
                 img_id = s_link[s_link.find("id=") + 3:]
+                print(img_id)
                 #Nombre del objeto
                 obj_name = df['Cuál es la cosa perdida?'][ind]
                 #Lugar donde fue visto por la última vez
@@ -125,7 +127,7 @@ for ind in df.index:
                 #Enlace de descarga de la imagen
                 link = "https://drive.google.com/uc?id=" + img_id
                 img_req = requests.get(link)
-                img_desc = "Objeto encontrado: " + obj_name + "\n" + "Lugar donde se perdió: \" " + last_seen + "\" \n" + "Información de contacto: \"" + place_left+ "\" \n"
+                img_desc = "Objeto perdido: " + str(obj_name) + "\n" + "Lugar donde se perdió: \" " + str(last_seen) + "\" \n" + "Información de contacto: \"" + str(contact_info) + "\" \n"
                 if img_req.status_code == 200:
                     filename = "uploadImg.png"
                     p = filename
@@ -135,6 +137,7 @@ for ind in df.index:
                         print("Imagen descargada")
                         #Sube una publicación con la foto
                         cl.photo_upload(path=Path(p),caption=img_desc, usertags=[])
+                    print("Se subió la publicación")
                     time.sleep(10)
             else:
                 #obtiene el link de la imagen
@@ -143,8 +146,9 @@ for ind in df.index:
                 contact_info = df['Información de contacto'][ind]
                 filename = "generic.jpg"
                 p = filename
-                img_desc = "Objeto encontrado: " + str(obj_name) + "\n" + "Lugar donde se perdió: \" " + str(last_seen) + "\" \n" + "Información de contacto: \"" + str(contact_info) + "\" \n"
+                img_desc = "Objeto perdido: " + str(obj_name) + "\n" + "Lugar donde se perdió: \"" + str(last_seen) + "\" \n" + "Información de contacto: \"" + str(contact_info) + "\" \n"
                 cl.photo_upload(path=Path(p),caption=img_desc, usertags=[])
+                print("Se subió la publicación")
                 time.sleep(10)
 
 print("Las nuevas entradas se subieron con éxito.")
