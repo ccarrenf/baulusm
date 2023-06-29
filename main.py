@@ -68,7 +68,7 @@ def login_user():
 login_user()
 
 #Obtiene el excel con las respuestas al formulario
-r = requests.get("https://docs.google.com/spreadsheet/ccc?key=1OgH12Ey_ZIRRJVruRSOvmRL1jH6e7JiQhvM_2unKKtg&output=csv")
+r = requests.get("https://docs.google.com/spreadsheet/ccc?key=A&output=csv")
 if r.status_code == 200:
     print("Solicitud exitosa")
 else: print("OCurrió un error")
